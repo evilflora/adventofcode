@@ -1,0 +1,15 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  clock_t begin = clock();
+    
+  char string[] = "91212129";
+  short len = sizeof(string) - 1, i = 0, resultat = 0;
+  for(;i<len;i++) if (string[i] == string[(i+1)%len]) resultat+=string[i]-'0';
+
+  clock_t end = clock();
+  printf("Résultat %d\n",resultat);
+  printf("Duration = %f s\n",(double)(end - begin) / CLOCKS_PER_SEC);
+}
