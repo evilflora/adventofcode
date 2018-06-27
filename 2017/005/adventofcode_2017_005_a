@@ -49,14 +49,14 @@ int main() {
 	               -274,-790,-661,-277,-379,-741,-949,-681,-202,-681,-6,-50,-930,-367,-590,-498,-120,-737,-393,-765,-344,-937,-271,
 	               -766,-920,-204,-621,-714,-17,-554,-1003,-605,-616,-1013,-730,-621,-488,-1022,-163,-38,-418,-920,-155,-286,-969,
 	               -426,-370,-153,-940,-1009,-659,-629,-186,-511,-989,-809,-285,-397,-87,-153,-493,-1021,-817,-444,-46,-667,-845,
-	               -641,-20,-756,-973,-811,-355,-1042,-329,-400,-297};
-  short exp[] = {0,3,0,1,-3};
-  short len = sizeof(tab)/sizeof(tab[0]);
-  int index = 0, value = 0;
+	               -641,-20,-756,-973,-811,-355,-1042,-329,-400,-297}; // tableau input
+  short exp[] = {0,3,0,1,-3}; // tableau de test, résultat 5
+  short len = sizeof(tab)/sizeof(tab[0]); // taille tu tableau
+  int index = 0, value = 0; // index = position dans le tableau, valeur = nombres d'étapes
   
   while(index < len) {
     index+=tab[index]++; // on avance du nombre de cases de la case ou nous sommes et on incrémente la case précédente
-  value++;
+    value++;
   }
   
   clock_t end = clock();
