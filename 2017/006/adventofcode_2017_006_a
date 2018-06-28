@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <array>
+
+using namespace std;
+
+int main() {
+  clock_t begin = clock();
+
+  const short len = 16; // taille tu tableau
+  array<short, len> tab = {10,3,15,10,5,15,5,15,9,2,5,8,5,2,3,6}; // tableau de test, résultat 14029
+  // {2,8,8,5,4,2,3,1,5,5,1,2,15,13,5,14}; // tableau de test, résultat 3156
+  short value = 0; // index = position dans le tableau, valeur = nombres d'étapes
+  bool stop = false;
+  vector<array<short, len>> memory;
+  
+  while(!stop) {
+    short max = -1,index_found; // variable temporaire voir boucle
+    short local_index = 0;
+    
+    for(int i = 0; i < len; i++) { // recherche du plus grand nombre et son index dans le tableau
+      if(tab[i] > max) {
+        max = tab[i];
+        local_index=index_found=i;
+      }
+    }
+    
+    //Essaye ça
+    tab[index_found] = 0;
+    while(max--) { // on fait ça X fois la valeur de max
+      tab[(unsigned short)(++local_index)%len]++; // on ahoute +1 à la case suivante
+    }
+
+    memory.push_back(tab); // augmente automatiquement la taille du vector
+    
+    for(int i = 0; i < memory.size()-1 ; i++) { // on cherche si on a déjà vu cette valeur
+      if(memory[i]==tab) { stop = true; break; }
+    }
+    
+    value++;
+  }
+  
+  clock_t end = clock();
+  printf("Résultat : "); for(int i = 0; i < len; i++) printf("%d ",tab[i]); printf("\n");
+  printf("Nombre de steps : %d\n",value);
+  printf("Duration = %f s\n",(double)(end - begin) / CLOCKS_PER_SEC);
+}
