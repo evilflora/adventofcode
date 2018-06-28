@@ -25,7 +25,6 @@ int main() {
       }
     }
     
-    //Essaye ça
     tab[index_found] = 0;
     while(max--) { // on fait ça X fois la valeur de max
       tab[(unsigned short)(++local_index)%len]++; // on ahoute +1 à la case suivante
