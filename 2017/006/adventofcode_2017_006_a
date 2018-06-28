@@ -8,8 +8,8 @@ int main() {
   clock_t begin = clock();
 
   const short len = 16; // taille tu tableau
-  array<short, len> tab = {10,3,15,10,5,15,5,15,9,2,5,8,5,2,3,6}; // tableau de test, résultat 14029
-  // {2,8,8,5,4,2,3,1,5,5,1,2,15,13,5,14}; // tableau de test, résultat 3156
+  array<short, len> tab = {10,3,15,10,5,15,5,15,9,2,5,8,5,2,3,6}; // résultat 14029
+  //array<short, len> tab =  {2,8,8,5,4,2,3,1,5,5,1,2,15,13,5,14}; // résultat 3156
   short value = 0; // index = position dans le tableau, valeur = nombres d'étapes
   bool stop = false;
   vector<array<short, len>> memory;
