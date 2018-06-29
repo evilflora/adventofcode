@@ -527,13 +527,14 @@ int main() {
   bool stop = false;
   
   for(int i = 0; i < len; i++) {
-    vector<string> tab{explode(memory[i], ' ')}; // on decoupe la chaine en une liste de commandes
+    vector<string> tab{explode(memory[i], ' ')}; // on decoupe la chaine en une liste de mots
     short max = tab.size(); // on garde en memoire la longueur max
     short offset = 0; // par ou on commence a comparer
     stop = false; // on ne s'arrete pas
     
-    while(max-offset > 1 && !stop) { // on compare du premier mot jusqu'a l'avant dernier mot et tant qu'il n'y a pas d'egalites
-      for(int j = offset; j < max; j++) { // on compare de l'offset au dernier moi
+    while(max-offset && !stop) { // on compare du premier mot jusqu'a l'avant dernier mot et tant qu'il n'y a pas d'egalites
+      for(int j = offset; j < max-1; j++) { // on compare de l'offset au dernier moi
+        // cout << tab[offset] << " vs " << tab[j+1] << endl;
         if(tab[offset] == tab[j+1]) { valide--; stop=true; break; } // si on trouve une egalite, on coupe tout
       }
       offset++; // mot suivant
@@ -545,16 +546,15 @@ int main() {
   printf("Duration = %f s\n",(double)(end - begin) / CLOCKS_PER_SEC);
 }
 
-const vector<string> explode(const string& s, const char& c) { 
+const vector<string> explode(const string& s, const char& c) {
   string buff{""};
   vector<string> v;
   
-  for(auto n:s)
-  {
-   if(n != c) buff+=n; else
-   if(n == c && buff != "") { v.push_back(buff); buff = ""; }
+  for(auto n:s) { // on parcours toute la chaine de caractère 
+  	if(n != c) buff+=n; else // si caractere diff du separateur construit le mot
+  	if(n == c && buff != "") { v.push_back(buff); buff = ""; } // si on trouve le caractère et que la chaine n'est pas vide, on l'ajoute au vecteur
   }
-  if(buff != "") v.push_back(buff);
+  if(buff != "") v.push_back(buff); // hum nani ?
   
   return v;
 }
