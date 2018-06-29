@@ -1,10 +1,17 @@
 #include <iostream>
 #include <cstring>
+#include <vector>
+#include <array>
 
 using namespace std;
 
+const vector<string> explode(const string&, const char&);
+
 int main() {
-  char string[][128] = {"kvvfl kvvfl olud wjqsqa olud frc",
+  clock_t begin = clock();
+  
+  const short len = 512;
+  array<string, len> memory = {"kvvfl kvvfl olud wjqsqa olud frc",
 "slhm rdfm yxb rsobyt rdfm",
 "pib wzfr xyoakcu zoapeze rtdxt rikc jyeps wdyo hawr xyoakcu hawr",
 "ismtq qwoi kzt ktgzoc gnxblp dzfayil ftfx asscba ionxi dzfayil qwoi",
@@ -515,23 +522,40 @@ int main() {
 "tlnd qcxj ker fdir cgkpo nrqhyq raef uqadf iahy rxx",
 "mhvisju lhmdbs tcxied xeidtc ujry cditex gvqpqm",
 "cgc jazrp crgnna uvuokl uvuokl uoiwl sknmc sknmc",
-"rvbu czwpdit vmlihg spz lfaxxev zslfuto oog dvoksub"};
-  char *search, *current;
-  short i = 0, size = sizeof(string)/sizeof(string[0]),valide = size;
+"rvbu czwpdit vmlihg spz lfaxxev zslfuto oog dvoksub"}; // input, réponse 337
+  short valide = len;
+  bool stop = false;
   
-  for(; i < 12; i++) { // pour toutes les chaines à vérifier
-    search = strtok(string[i], " \n"); // le mot que l'on recherche
-    current = NULL; // reset de la valeur lors du changement de chaine à vérifier
-    while(search != NULL) { // tant qu'on trouve des 'mots'
-        printf("Equals %s == %s\n",search,current); // search == current
-        /*if (strcmp(search,current) == 0) {
-            printf("Equals %s == %s\n",search,current);
-            valide--;
-            break;
-        }*/
-        current = search;
-        search = strtok(NULL, " \n"); // le mot suivant
+  for(int i = 0; i < len; i++) {
+    vector<string> tab{explode(memory[i], ' ')}; // on decoupe la chaine en une liste de commandes
+    short max = tab.size();
+    short offset = 0;
+    stop = false;
+    
+    while(max-offset > 1 && !stop) {
+      for(int j = offset; j < max; j++) {
+        // cout << tab[offset] << " vs " << tab[j+1] << endl;
+        if(tab[offset] == tab[j+1]) { valide--; stop=true; break; }
+      }
+      offset++;
     }
   }
+
+  clock_t end = clock();
   printf("Valides %d\n",valide);
+  printf("Duration = %f s\n",(double)(end - begin) / CLOCKS_PER_SEC);
+}
+
+const vector<string> explode(const string& s, const char& c) {
+	string buff{""};
+	vector<string> v;
+	
+	for(auto n:s)
+	{
+		if(n != c) buff+=n; else
+		if(n == c && buff != "") { v.push_back(buff); buff = ""; }
+	}
+	if(buff != "") v.push_back(buff);
+	
+	return v;
 }
