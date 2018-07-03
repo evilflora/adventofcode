@@ -1,3 +1,5 @@
+//http://adventofcode.com/2017/day/1
+
 #include <iostream>
 
 using namespace std;
@@ -5,9 +7,9 @@ using namespace std;
 int main() {
   clock_t begin = clock();
     
-  char string[] = "91212129";
-  short len = sizeof(string) - 1, i = 0, resultat = 0;
-  for(;i<len;i++) if (string[i] == string[(i+1)%len]) resultat+=string[i]-'0';
+  char input[] = "91212129";
+  short len = sizeof(input) - 1, i = 0, resultat = 0;
+  for(;i<len;i++) if (input[i] == input[(i+1)%len]) resultat+=input[i]-'0';
 
   clock_t end = clock();
   printf("Résultat %d\n",resultat);
