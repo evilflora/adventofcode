@@ -1046,7 +1046,6 @@ int main() {
   }
   
   max = mymap[current[0]]; // le max temporaire
-  len = mymap.size();
   
   for (map<string, int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
     if (it->second > max) { max = it->second;  }
