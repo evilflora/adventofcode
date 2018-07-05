@@ -8,11 +8,6 @@ using namespace std;
 
 const string explode(const string&, const char&);
 
-/* Cet algo ne fonctionne pas encore !!!!!!!!!!
- * Cet algo ne fonctionne pas encore !!!!!!!!!!
- * Cet algo ne fonctionne pas encore !!!!!!!!!!
- */
-
 int main() {
   clock_t begin = clock();
   
