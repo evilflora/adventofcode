@@ -1233,24 +1233,12 @@ int main() {
   }
 
   i = j = 0;
-  
-  /*while(tab.size() > 1) { // Tant qu'il reste plus d'un element dans la ligne
-    if ((i+1) >= tab.size()) j++; // Si on atteind le bout du tableau on compare par le début
-    if( tab[(i+1)%tab.size()].find(explode(tab[j], ' ').data()) != -1) { // si je me trouve dans le suivant
-      printf("%3d)%8s vs %3d)%s\n",j,explode(tab[j], ' ').data(),(i+1)%tab.size(),tab[(i+1)%tab.size()].data());
-      tab.erase(tab.begin()+j); // on efface
-      i = j = 0;
-    } else {
-      i++;
-    }
-  }*/
-  
+
   len = tab.size();
   for(i = 0; i < len; i++) {
     for(j = 0; j < len; j++) {
       if( tab[j+1].find(explode(tab[i], ' ').data()) != -1 && i != j+1) { // si je me trouve dans le suivant
-        mymap[i] = 0; // i ou j
-        //printf("%3d) %7s vs %3d) %s\n",i,explode(tab[i], ' ').data(),j+1,tab[j+1].data());
+        mymap[i] = 0;
         break;
       }
     }
