@@ -2,6 +2,7 @@
 #include <cstring>
 #include <vector>
 #include <array>
+#include <map>
 
 using namespace std;
 
@@ -1221,33 +1222,48 @@ int main() {
                         "jptl (61)",
                         "ugml (68) -> gyxo, ebii, jptl",
                         "gyxo (61)",
-                        "cntj (57)"}; // input*/
-  int i = 0, j = 0;
+                        "cntj (57)"};*/ // input, reponse : jklp
+  map<int,int> mymap; // par exemple mymap[1] = 5;
+  int i = 0, j = 0, len;
   
   while(i < tab.size()) { // suppresion des lignes inutiles
-    if (tab[i].find("->") == -1){
-      tab.erase(tab.begin()+i);
-      i = 0;
-    } else i++;
+    if (tab[i].find("->") == -1) { // si on ne trouve pas de "->" alors la ligne est inutile
+      tab.erase(tab.begin()+i); // et on l'efface
+    } else i++; // si on trouve "->" on passe à la suivante
   }
 
   i = j = 0;
   
-  while(tab.size() > 1) { // Tant qu'il reste plus d'un element dans la ligne
+  /*while(tab.size() > 1) { // Tant qu'il reste plus d'un element dans la ligne
     if ((i+1) >= tab.size()) j++; // Si on atteind le bout du tableau on compare par le début
-    //printf("%d vs %d",j,(i+1)%tab.size());
     if( tab[(i+1)%tab.size()].find(explode(tab[j], ' ').data()) != -1) { // si je me trouve dans le suivant
-    //printf(" OUI\n");
+      printf("%3d)%8s vs %3d)%s\n",j,explode(tab[j], ' ').data(),(i+1)%tab.size(),tab[(i+1)%tab.size()].data());
       tab.erase(tab.begin()+j); // on efface
       i = j = 0;
     } else {
       i++;
-      //printf(" NON\n");
+    }
+  }*/
+  
+  len = tab.size();
+  for(i = 0; i < len; i++) {
+    for(j = 0; j < len; j++) {
+      if( tab[j+1].find(explode(tab[i], ' ').data()) != -1 && i != j+1) { // si je me trouve dans le suivant
+        mymap[i] = 0; // i ou j
+        //printf("%3d) %7s vs %3d) %s\n",i,explode(tab[i], ' ').data(),j+1,tab[j+1].data());
+        break;
+      }
     }
   }
   
+  i = 0;
+  
+  for (map<int, int>::iterator it=mymap.begin(); it!=mymap.end(); ++it) {
+    tab.erase(tab.begin()+it->first-i++);
+  }
+  
   clock_t end = clock();
-  printf("Réponse : %s\n",tab[0].data());
+  printf("Réponse : %s\n",explode(tab[0], ' ').data()); // la réponse est normalement la seule valeur restante 
   printf("Duration = %f s\n",(double)(end - begin) / CLOCKS_PER_SEC);
 }
 
