@@ -1230,9 +1230,10 @@ int main() {
   i = j = 0;
 
   len = tab.size();
+  
   for(i = 0; i < len; i++) {
-    for(j = 0; j < len; j++) {
-      if( tab[j+1].find(explode(tab[i], ' ').data()) != -1 && i != j+1) { // si je me trouve dans le suivant
+    for(j = 0; j < len - 1; j++) {
+      if((tab[j+1].find(explode(tab[i], ' ').data()) != -1) && (i != j+1)) { // si je me trouve dans le suivant
         mymap[i] = 0;
         break;
       }
