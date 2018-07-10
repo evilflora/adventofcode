@@ -1017,7 +1017,7 @@ int main() {
       l = stoi(ligne[0].data());
       w = stoi(ligne[1].data());
       h = stoi(ligne[2].data());
-      min = ((l*w) < (w*h) ? ((l*w) < (h*l) ? ((2*l)+(2*w)) : ((2*h)+(2*l))) : ((w*h) < (h*l) ? ((2*w)+(2*h)) : ((2*)h+(2*l))));
+      min = ((l*w) < (w*h) ? ((l*w) < (h*l) ? ((2*l)+(2*w)) : ((2*h)+(2*l))) : ((w*h) < (h*l) ? ((2*w)+(2*h)) : ((2*h)+(2*l))));
       total += (min + (l*w*h));
   }
 	
