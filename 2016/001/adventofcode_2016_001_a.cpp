@@ -11,26 +11,28 @@ const int get_weight(const string&);
 int main() {
   clock_t begin = clock();
   
-  string input = "R5,L5,R5,R3"; // chaine d entree
-  short direction = 0; // 0 = N, 1 = E, 2 = S, 3 = W
+  string input = "R3,L5,R1,R2,L5,R2,R3,L2,L5,R5,L4,L3,R5,L1,R3,R4,R1,L3,R3,L2,L5,L2,R4,R5,R5,L4,L3,L3,R4,R4,R5,L5,L3,R2,R2,L3,L4,L5,R1,R3,L3,R2,L3,R5,L194,L2,L5,R2,R1,R1,L1,L5,L4,R4,R2,R2,L4,L1,R2,R53,R3,L5,R72,R2,L5,R3,L4,R187,L4,L5,L2,R1,R3,R5,L4,L4,R2,R5,L5,L4,L3,R5,L2,R1,R1,R4,L1,R2,L3,R5,L4,R2,L3,R1,L4,R4,L1,L2,R3,L1,L1,R4,R3,L4,R2,R5,L2,L3,L3,L1,R3,R5,R2,R3,R1,R2,L1,L4,L5,L2,R4,R5,L2,R4,R4,L3,R2,R1,L4,R3,L3,L4,L3,L1,R3,L2,R2,L4,L4,L5,R3,R5,R3,L2,R5,L2,L1,L5,L1,R2,R4,L5,R2,L4,L5,L4,L5,L2,L5,L4,R5,R3,R2,R2,L3,R3,L2,L5"; // chaine d entree
+  //string input = "R3,L5,R1,R2,L5,R2,R3,L2,L5,R5"; // chaine d entree
+  char boussole[4] = {'N','E','S','O'};
+  short direction = 0; // voir switch
   vector<string> tab{explode(input, ',')}; // on decoupe la chaine en une liste de commandes
-  int x = 0, y = 0; // point de deppart
+  int x = 0, y = 0; // point de depart
   short len = tab.size(); // le nombres de commandes à executer
   
   for(int i = 0; i < len; i++) {
-   direction = (direction + (tab[i][0] == 'R' ? 1 : -1) ) % 4;
+   direction = (direction + (tab[i][0] == 'R' ? 1 : 3) ) % 4;
    switch(direction) {
-    case 0:
-      x += get_weight(tab[i]);
-    break;
-    case 1:
+    case 0: // Nord
       y += get_weight(tab[i]);
     break;
-    case 2:
-      x -= get_weight(tab[i]);
+    case 1: // Est
+      x += get_weight(tab[i]);
     break;
-    case 3:
+    case 2: // Sud
       y -= get_weight(tab[i]);
+    break;
+    case 3: // Ouest
+      x -= get_weight(tab[i]);
     break;
    }
   } // listage des commandes
@@ -46,7 +48,7 @@ const vector<string> explode(const string& s, const char& c) {
 	
 	for(auto n:s)
 	{
-		if(n != c) buff+=n; else
+		if(n != c && n != ' ') buff+=n; else
 		if(n == c && buff != "") { v.push_back(buff); buff = ""; }
 	}
 	if(buff != "") v.push_back(buff);
@@ -62,4 +64,4 @@ const int get_weight(const string& s) {
   } 
     
   return stoi(buff);
-}
+} 
