@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 int main() {
   clock_t begin = clock();
   /*vector<string> input = {{"ULL"},
